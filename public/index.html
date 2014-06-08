@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Ember-Orchestrate Starter Kit</title>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+<body>
+
+  <script type="text/x-handlebars">
+    {{render "nav"}}
+
+    <div class="container">
+      {{outlet}}
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" id="index">
+
+  </script>
+
+  <script type="text/x-handlebars" id="nav">
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          {{link-to 'Project Name' 'home' class="navbar-brand"}}
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li>{{link-to 'Home' 'home'}}</li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+          {{#if session.isAuthenticated}}
+            <li><a href="#" {{action "signOut"}}>Sign Out</a></li>
+          {{else}}
+            <li>{{link-to "Sign Up" "signup"}}</li>
+            <li>{{link-to "Sign In" "signin"}}</li>
+          {{/if}}
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" id="components/form-field">
+    <div class="form-group">
+      <label {{bind-attr for=label}}>{{label}}</label>
+      {{#if template}}
+        {{yield}}
+      {{else}}
+        {{input type=type value=value id=for class="form-control"}}
+      {{/if}}
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" id="signin">
+    <h2>Sign In</h2>
+
+    {{#if notice}}
+      <div class="alert alert-danger">{{notice}}</div>
+    {{/if}}
+    <form {{action "signIn" on="submit"}}>
+      {{form-field type="email" for="email" value=email}}
+      {{form-field type="password" for="password" value=password}}
+      {{input type="submit"}}
+    </form>
+  </script>
+
+  <script type="text/x-handlebars" id="signup">
+   <h2>Sign Up</h2>
+
+    {{#if notice}}
+      <div class="alert alert-danger">{{notice}}</div>
+    {{/if}}
+    <form {{action "signUp" on="submit"}}>
+      {{form-field type="text" for="first_name" value=firstName}}
+      {{form-field type="text" for="last_name" value=lastName}}
+      {{form-field type="email" for="email" value=email}}
+      {{form-field type="password" for="password" value=password}}
+      {{input type="submit"}}
+    </form>
+  </script>
+
+  <script type="text/x-handlebars" id="home">
+    <h2>Welcome, {{session.currentUser.first_name}} {{session.currentUser.last_name}}</h2>
+  </script>
+
+  <script src="js/libs/jquery-1.10.2.js"></script>
+  <script src="js/libs/handlebars-1.1.2.js"></script>
+  <script src="js/libs/ember-1.5.1.js"></script>
+  <script src="js/libs/bootstrap.js"></script>
+  <script src="js/libs/ic-ajax.js"></script>
+  <script src="js/app.js"></script>
+  <!-- to activate the test runner, add the "?test" query string parameter -->
+  <script src="tests/runner.js"></script>
+</body>
+</html>

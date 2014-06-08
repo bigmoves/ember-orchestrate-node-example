@@ -1,0 +1,14 @@
+/* Put your CSS here */
+body {
+  min-height: 2000px;
+  padding-top: 60px;
+}
+
+body .alert {
+  padding: 10px;
+  border-radius: 0;
+}
+
+body input[type="submit"] {
+  font-weight: bold;
+}
