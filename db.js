@@ -2,7 +2,7 @@
 
 var db = require('orchestrate')(process.env.ORCHESTRATE_API_KEY);
 var inflect = require('i')();
-var Promise = require('RSVP').Promise;
+var Promise = require('rsvp').Promise;
 
 var adapter = {};
 
